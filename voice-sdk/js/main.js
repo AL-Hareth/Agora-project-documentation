@@ -24,9 +24,9 @@ const options = {
     * remoteUid: holds the remote user id
     */
 const channelParameters = {
-  localAudioTrack: null,
-  remoteAudioTrack: null,
-  remoteUid: null,
+    localAudioTrack: null,
+    remoteAudioTrack: null,
+    remoteUid: null,
 };
 
 /** @type {import("agora-rtc-sdk-ng").IAgoraRTCClient} */
@@ -40,7 +40,6 @@ async function initCall() {
     client = AgoraRTC.createClient(clientConfig);
 
     // listens for a user joining the channel
-    // media Type can be "audio", "video" or "datachannel"
     client.on('user-published', handleUserPublished)
     // listens for a user leaving the channel
     client.on('user-unpublished', (user) => {
@@ -62,14 +61,14 @@ async function initCall() {
             await client.join(options.appId, options.channel, options.token, options.uid);
             showMessage(`Joined the ${options.channel} successfully successfully`);
             // Create a local audio track from the microphone audio.
-                channelParameters.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
+            channelParameters.localAudioTrack = await AgoraRTC.createMicrophoneAudioTrack();
             // Publish the local audio track in the channel.
-                await client.publish(channelParameters.localAudioTrack);
+            await client.publish(channelParameters.localAudioTrack);
         }
 
         leaveButton.addEventListener('click', async () => {
             // Destroy the local audio track.
-                channelParameters.localAudioTrack.close();
+            channelParameters.localAudioTrack.close();
             // Leave the channel
             await client.leave();
             // Refresh the page for reuse
@@ -88,7 +87,7 @@ async function handleUserPublished(user, mediaType) {
     await client.subscribe(user, mediaType);
     console.log("user joined");
 
-    if(mediaType === "audio") {
+    if (mediaType === "audio") {
         channelParameters.localAudioTrack = user.audioTrack;
         // Get the RemoteAudioTrack object from the AgoraRTCRemoteUser object.
         channelParameters.remoteAudioTrack = user.audioTrack;

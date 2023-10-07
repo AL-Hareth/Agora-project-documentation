@@ -10,6 +10,15 @@ Agora can be included in one of the following ways:
 ```bash
 $ npm i agora-rtc-sdk-ng
 ```
+## Important Concepts
+- Console
+- Token
+- App ID
+- Channel
+- User ID
+and more..
+
+> This [Link](https://docs.agora.io/en/video-calling/overview/core-concepts?platform=web) has some important concepts before you start using Agora in your application
 
 ## Usage
 
